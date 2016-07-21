@@ -1,0 +1,16 @@
+td.iv-good{
+  background-color: lightblue;
+}
+
+td.iv-best{
+  background-color: lightgreen;
+}
+
+table.pokemons td,th{
+  padding: 1px;
+  text-align: center;
+}
+
+table.pokemons td.left,th.left{
+  text-align: left;
+}

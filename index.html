@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pokemon Go - Viewer</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="mustache.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="viewer.js"></script>
+    <link rel="stylesheet" href="viewer.css">
+
+    <script>
+
+    var pokemons;
+    var template;
+
+    function preloadTemplate(){
+      template = $('#table-template').html();
+    }
+
+    function render(){
+      console.log("data", pokemons);
+      var rendered = Mustache.render(template, pokemons);
+      $('#target').html(rendered);
+    }
+
+    $(function() {
+
+      preloadTemplate();
+
+      $("#load").bind('click', function(){
+          $(".import").hide();
+          VIEWER.load($("#jsonInput").val());
+          VIEWER.sortPokemon();
+          pokemons = VIEWER.getPokemons();
+          render();
+      })
+
+    });
+    </script>
+  </head>
+  <body>
+      <div style="max-width: 800px; margin: auto">
+      <h1>Pokemon GO - Inventory</h1>
+      <div class="import">
+        <textarea id="jsonInput" name="json" rows="12" cols="20">Paste your JSON here</textarea> <br>
+        <button id="load" type="button" name="Load">Load</button>
+      </div>
+      <div id="target">
+
+      </div>
+
+      <div style="display:none">
+      <div id="templateTxt">
+        {{#pokemon}}
+          id:{{pokemon_id}}, cp:{{cp}}, {{individual_attack}}/{{individual_defense}}/{{individual_stamina}}<br/>
+        {{/pokemon}}
+      </div>
+
+      <script id="table-template"type="text/template">
+        <table class="pokemons striped" >
+          <thead>
+            <tr>
+                <th data-field="id" class="left">Pokemon</th>
+                <th data-field="cp">CP</th>
+                <th data-field="hp">HP</th>
+                <th data-field="cp">%IV</th>
+                <th data-field="atk">ATK IV</th>
+                <th data-field="def">DEF IV</th>
+                <th data-field="sta">STA IV</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#pokemon}}
+            <tr>
+              <td class="left">{{nameFr}}</td>
+              <td>{{cp}}</td>
+              <td>{{stamina_max}}</td>
+              <td class="iv-{{ivPctRate}}">{{ivPct}}</td>
+              <td>{{individual_attack}}</td>
+              <td>{{individual_defense}}</td>
+              <td>{{individual_stamina}}</td>
+            </tr>
+            {{/pokemon}}
+          </tbody>
+        </table>
+      </script>
+    </div>
+  </body>
+</html>
