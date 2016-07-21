@@ -25,6 +25,9 @@ VIEWER = {
 
   computeInfo: function(pokemon){
     pokemon.nameFr = this.namesFr[pokemon.pokemon_id];
+    if(pokemon.nickname !== undefined){
+      pokemon.nameFr += " (" + pokemon.nickname +")";
+    }
     pokemon.individual_defense = pokemon.individual_defense || 0;
     pokemon.individual_attack = pokemon.individual_attack || 0;
     pokemon.individual_stamina = pokemon.individual_stamina || 0;
