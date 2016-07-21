@@ -41,18 +41,33 @@ VIEWER = {
   sortPokemon: function(){
 
     var byCP = function(a,b){
-      return a.cp > b.cp;
+      if (a.cp < b.cp){
+          return -1;
+      }
+
+      if (a.cp > b.cp){
+        return 1;
+      }
+      return 0;
     }
 
     var byPokemonId = function(a,b){
-      return a.pokemon_id > b.pokemon_id;
+      if (a.pokemon_id < b.pokemon_id){
+          return -1;
+      }
+
+      if (a.pokemon_id > b.pokemon_id){
+        return 1;
+      }
+      return 0;
     }
 
-    this.pokemons.sort(byCP);
-    this.pokemons.sort(byPokemonId);
+    this.pokemons = this.pokemons.sort(byCP);
+    this.pokemons = this.pokemons.sort(byPokemonId);
   },
 
   namesFr: [
+    "missingo",
     "Bulbizarre",
     "Herbizarre",
     "Florizarre",
