@@ -14,3 +14,7 @@ table.pokemons td,th{
 table.pokemons td.left,th.left{
   text-align: left;
 }
+
+.filter{
+  margin: 20px;
+}

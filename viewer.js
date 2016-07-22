@@ -37,28 +37,24 @@ VIEWER = {
   },
 
   getPokemons: function(){
-    return {"pokemon" : this.pokemons};
+    return this.pokemons;
   },
 
-  // Sort By CP then ID
-  sortPokemon: function(){
-
-    var byCP = function(a,b){
+  pokemonSort: {
+    byCP: function(a,b){
       return +b.cp - +a.cp
-    }
+    },
 
-    var byPokemonId = function(a,b){
-      return +a.pokemon_id - +b.pokemon_id
-    }
-
-    var byCpAndPokemonId = function(a,b){
+    byCpAndPokemonId: function(a,b){
       if(a.pokemon_id != b.pokemon_id){
           return +a.pokemon_id - +b.pokemon_id;
       }
       return +b.cp - +a.cp;
-    }
+    },
 
-    this.pokemons = this.pokemons.sort(byCpAndPokemonId);
+    byCaptureTime: function(a,b){
+      return +b.creation_time_ms - +a.creation_time_ms
+    }
   },
 
   namesFr: [

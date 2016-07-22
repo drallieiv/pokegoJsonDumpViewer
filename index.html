@@ -21,7 +21,7 @@
 
     function render(){
       console.log("data", pokemons);
-      var rendered = Mustache.render(template, pokemons);
+      var rendered = Mustache.render(template, {"pokemon" : pokemons});
       $('#target').html(rendered);
     }
 
@@ -32,10 +32,26 @@
       $("#load").bind('click', function(){
           $(".import").hide();
           VIEWER.load($("#jsonInput").val());
-          VIEWER.sortPokemon();
           pokemons = VIEWER.getPokemons();
+          pokemons.sort(VIEWER.pokemonSort.byCpAndPokemonId);
           render();
+          $(".filter").show();
       })
+
+      $("#sort_base").bind('click', function(){
+        pokemons = pokemons.sort(VIEWER.pokemonSort.byCpAndPokemonId);
+        render();
+      });
+
+      $("#sort_cp").bind('click', function(){
+        pokemons = pokemons.sort(VIEWER.pokemonSort.byCP);
+        render();
+      });
+
+      $("#sort_capture").bind('click', function(){
+        pokemons = pokemons.sort(VIEWER.pokemonSort.byCaptureTime);
+        render();
+      });
 
     });
     </script>
@@ -46,6 +62,18 @@
       <div class="import">
         <textarea id="jsonInput" name="json" rows="12" cols="20">Paste your JSON here</textarea> <br>
         <button id="load" type="button" name="Load">Load</button>
+      </div>
+      <div class="filter" style="display: none;">
+        <div class="filter-sort">
+          <label>Sorting and processing</label>
+          <button id="sort_base" type="button" name="sort_base">Sort by Pokemon # and CP</button>
+          <button id="sort_cp" type="button" name="sort_cp">Sort by CP</button>
+          <button id="sort_capture" type="button" name="sort_capture">Sort by Capture date</button>
+        <div>
+        <div class="filter-hide">
+          <label>Show or hide</label>
+          <button id="load" type="button" name="sort_base">TODO</button>
+        <div>
       </div>
       <div id="target">
 
