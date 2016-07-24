@@ -53,6 +53,11 @@
         render();
       });
 
+      $("#sort_iv").bind('click', function(){
+        pokemons = pokemons.sort(VIEWER.pokemonSort.byIV);
+        render();
+      });
+
     });
     </script>
   </head>
@@ -69,6 +74,7 @@
           <button id="sort_base" type="button" name="sort_base">Sort by Pokemon # and CP</button>
           <button id="sort_cp" type="button" name="sort_cp">Sort by CP</button>
           <button id="sort_capture" type="button" name="sort_capture">Sort by Capture date</button>
+          <button id="sort_iv" type="button" name="sort_iv">Sort by IV</button>
         <div>
         <div class="filter-hide">
           <label>Show or hide</label>
@@ -77,13 +83,6 @@
       </div>
       <div id="target">
 
-      </div>
-
-      <div style="display:none">
-      <div id="templateTxt">
-        {{#pokemon}}
-          id:{{pokemon_id}}, cp:{{cp}}, {{individual_attack}}/{{individual_defense}}/{{individual_stamina}}<br/>
-        {{/pokemon}}
       </div>
 
       <script id="table-template"type="text/template">
@@ -114,6 +113,6 @@
           </tbody>
         </table>
       </script>
-    </div>
+
   </body>
 </html>

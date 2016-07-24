@@ -54,6 +54,10 @@ VIEWER = {
 
     byCaptureTime: function(a,b){
       return +b.creation_time_ms - +a.creation_time_ms
+    },
+
+    byIV: function(a,b){
+      return +b.ivPct - +a.ivPct
     }
   },
 
